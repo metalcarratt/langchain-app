@@ -1,0 +1,38 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Paranoia</title>
+  <link rel="stylesheet" href="page.css">
+</head>
+<body>
+  <h1>Help Me..</h1>
+  <input type="text" id="userInput" placeholder="Type your message..." />
+  <button onclick="sendMessage()">Send</button>
+  <div id="chatLog"></div>
+  <div id="spinner" class="spinner" style="display: none;"></div>
+
+  <script>
+    async function makeCall(message) {
+      spinner.style.display = "block";
+      const response = await fetch("http://localhost:3000/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ input: message })
+      });
+      const data = await response.json();
+      document.getElementById("chatLog").innerHTML += `<p><strong>AI:</strong> ${data.response}</p>`;
+      document.getElementById("userInput").value = "";
+      spinner.style.display = "none";
+    }
+
+    async function sendMessage() {
+      const input = document.getElementById("userInput").value;
+      document.getElementById("chatLog").innerHTML += `<p><strong>You:</strong> ${input}</p>`;
+      makeCall(input);
+    }
+
+    makeCall("How are you?");
+  </script>
+</body>
+</html>

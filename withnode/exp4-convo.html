@@ -1,0 +1,75 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bot Convo</title>
+  <link rel="stylesheet" href="page.css">
+</head>
+<body>
+  <h1>Bot Convo</h1>
+  <fieldset>
+    <label>Bot 1 name:</label>
+    <input type="text" id="name1" placeholder="An astronaut" />
+  </fieldset>
+  <fieldset>
+    <label>Bot 1 description:</label>
+    <input type="text" id="desc1" placeholder="an astronaut" />
+  </fieldset>
+  <fieldset>
+    <label>Bot 2 name:</label>
+    <input type="text" id="name2" placeholder="An alien" />
+  </fieldset>
+  <fieldset>
+    <label>Bot 2 description:</label>
+    <input type="text" id="desc2" placeholder="an an alien from outer space" />
+  </fieldset>
+  <fieldset>
+    <label>Location:</label>
+    <input type="text" id="location" placeholder="on an asteroid" />
+  </fieldset>
+  <fieldset>
+    <label>Bot 1's first line:</label>
+    <input type="text" id="startWith" placeholder="Stop! Who are you?" />
+  </fieldset>
+  <fieldset>
+    <label>Rounds:</label>
+    <input type="text" id="rounds" placeholder="5" />
+  </fieldset>
+  <button onclick="sendMessage()">Go!</button>
+  <div id="spinner" class="spinner" style="display: none;"></div>
+  <div id="chatLog"></div>
+  
+
+  <script>
+    async function sendMessage() {
+        const name1 = document.getElementById("name1").value;
+        const desc1 = document.getElementById('desc1').value;
+        const name2 = document.getElementById("name2").value;
+        const desc2 = document.getElementById('desc2').value;
+        const location = document.getElementById("location").value;
+        const startWith = document.getElementById('startWith').value;
+        const rounds = document.getElementById('rounds').value;
+        spinner.style.display = "block";
+        const response = await fetch("http://localhost:3000/chat", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ input: {
+                name1, 
+                desc1, 
+                name2, 
+                desc2, 
+                location, 
+                startWith,
+                rounds
+            } })
+        });
+        const data = await response.json();
+        const messages = data.response;
+        for (var message of messages) {
+            document.getElementById("chatLog").innerHTML += `<p><strong>${message.name}:</strong> ${message.say}</p>`;
+        }
+        spinner.style.display = "none";
+    }
+  </script>
+</body>
+</html>

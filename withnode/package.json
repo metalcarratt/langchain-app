@@ -1,0 +1,31 @@
+{
+  "name": "withnode",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "chat": "concurrently \"node exp1-chat-api.js\" \"open ./exp1-chat.html\"",
+    "translate": "concurrently \"node exp2-translation-api.js\" \"open ./exp2-translation.html\"",
+    "paranoid": "concurrently \"node exp3-paranoid-bot-api.js\" \"open ./exp3-paranoid-bot.html\"",
+    "convo": "concurrently \"node exp4-convo-api.js\" \"open ./exp4-convo.html\"",
+    "bank": "concurrently \"node exp5-bank-api.js\" \"open ./exp5-bank.html\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@langchain/community": "^0.3.55",
+    "@langchain/core": "^0.3.75",
+    "@langchain/ollama": "^0.2.4",
+    "@langchain/openai": "^0.6.11",
+    "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "langchain": "^0.3.33"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
