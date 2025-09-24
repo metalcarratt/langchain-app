@@ -2,7 +2,7 @@ import { ChatOllama } from "@langchain/ollama";
 import { ChatPromptTemplate } from "@langchain/core/prompts";
 import { StructuredOutputParser } from "langchain/output_parsers";
 import { z } from "zod";
-import { runServer } from "./with-api.js";
+import { runServer } from "../util/with-api.js";
 
 const model = new ChatOllama({model: "llama2"});
 

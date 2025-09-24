@@ -1,6 +1,6 @@
 import { ChatOllama } from "@langchain/ollama";
 import { ChatPromptTemplate } from "@langchain/core/prompts";
-import { runServer } from "./with-api.js";
+import { runServer } from "../util/with-api.js";
 
 const model = new ChatOllama({
     model: "llama2",

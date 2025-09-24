@@ -2,7 +2,7 @@ import { ChatOllama } from "@langchain/ollama";
 import { ConversationChain } from "langchain/chains";
 import { ChatPromptTemplate } from "@langchain/core/prompts";
 import { BufferMemory } from "langchain/memory";
-import { runServer } from "./with-api.js";
+import { runServer } from "../util/with-api.js";
 
 const buildBot = ({myName, othersName, myDesc, othersDesc, talkWhere}) => {
     const systemInstruction = `

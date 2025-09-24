@@ -19,6 +19,10 @@ img {
     max-width: 300px;
 }
 
+img.wide {
+    max-width: none;
+}
+
 input, button {
     display: block;
     width: 100%;
@@ -43,6 +47,12 @@ p {
 button {
     font-size: 18px;
     padding: 8px;
+}
+
+button.small {
+    display: inline;
+    width: auto;
+    font-size: 16px;
 }
 
 .spinner {
@@ -89,4 +99,8 @@ fieldset label {
 .imgLabel label {
     margin-left: 20px;
     font-size: 70px;
+}
+
+.hidden {
+    display: none;
 }

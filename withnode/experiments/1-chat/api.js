@@ -1,7 +1,7 @@
 import { ChatOllama } from "@langchain/ollama";
 import { ConversationChain } from "langchain/chains";
 import { BufferMemory } from "langchain/memory";
-import { runServer } from "./with-api.js";
+import { runServer } from "../util/with-api.js";
 
 const model = new ChatOllama({model: "llama2"});
 const memory = new BufferMemory({

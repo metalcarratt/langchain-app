@@ -1,0 +1,55 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Chat</title>
+  <link rel="stylesheet" href="../util/page.css">
+  <script>
+    async function start() {
+      console.log('click start');
+      const hiddenElements = document.querySelectorAll(".hidden");
+
+      spinner.style.display = "block";
+      const response = await fetch("http://localhost:3000/start", {
+        method: "GET"
+      });
+      const data = await response.json();
+      document.getElementById("chatLog").innerHTML += `<p><strong>Jilly:</strong> ${data.response}</p>`;
+      document.getElementById("userInput").value = "";
+      spinner.style.display = "none";
+
+      hiddenElements.forEach(el => el.classList.remove("hidden"));
+      document.getElementById("startButton").classList.add("hidden");
+    }
+
+    async function sendMessage() {
+      const input = document.getElementById("userInput").value;
+      spinner.style.display = "block";
+      const response = await fetch("http://localhost:3000/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ input })
+      });
+      const data = await response.json();
+      const chatLog = document.getElementById("chatLog");
+      chatLog.innerHTML += `<p><strong>You:</strong> ${input}</p>`;
+      chatLog.innerHTML += `<p><strong>Jilly:</strong> ${data.response}</p>`;
+      document.getElementById("userInput").value = "";
+      spinner.style.display = "none";
+
+      chatLog.scrollTop = chatLog.scrollHeight;
+    }
+  </script>
+</head>
+<body>
+  <h1>Recruiter</h1>
+  <img src="recruiter1.jpeg" class="wide"/>
+
+  <button id="startButton" onclick="start()">Start</button>
+
+  <input type="text" id="userInput" placeholder="Type your message..." class="hidden"/>
+  <button onclick="sendMessage()" class="hidden">Send</button>
+  <div id="chatLog" class="hidden"></div>
+  <div id="spinner" class="spinner" style="display: none;"></div>
+</body>
+</html>

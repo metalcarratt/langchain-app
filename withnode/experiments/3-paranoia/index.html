@@ -2,39 +2,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Translate</title>
-  <link rel="stylesheet" href="page.css">
+  <title>Paranoia</title>
+  <link rel="stylesheet" href="../util/page.css">
 </head>
 <body>
-  <h1>Translate</h1>
+  <h1>Help Me..</h1>
   <input type="text" id="userInput" placeholder="Type your message..." />
-  <select id="language">
-    <option value="English">To English</option>
-    <option value="Korean">To Korean</option>
-    <option value="Chinese">To Chinese</option>
-    <option value="Spanish">To Spanish</option>
-    <option value="Russian">To Russian</option>
-  </select>
   <button onclick="sendMessage()">Send</button>
   <div id="chatLog"></div>
   <div id="spinner" class="spinner" style="display: none;"></div>
 
   <script>
-    async function sendMessage() {
-      const input = document.getElementById("userInput").value;
-      const language = document.getElementById('language').value;
+    async function makeCall(message) {
       spinner.style.display = "block";
       const response = await fetch("http://localhost:3000/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ input: {text: input, language } })
+        body: JSON.stringify({ input: message })
       });
       const data = await response.json();
-      document.getElementById("chatLog").innerHTML += `<p><strong>You:</strong> ${input}</p>`;
       document.getElementById("chatLog").innerHTML += `<p><strong>AI:</strong> ${data.response}</p>`;
       document.getElementById("userInput").value = "";
       spinner.style.display = "none";
     }
+
+    async function sendMessage() {
+      const input = document.getElementById("userInput").value;
+      document.getElementById("chatLog").innerHTML += `<p><strong>You:</strong> ${input}</p>`;
+      makeCall(input);
+    }
+
+    makeCall("How are you?");
   </script>
 </body>
 </html>

@@ -2,16 +2,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Chat</title>
-  <link rel="stylesheet" href="page.css">
+  <title>Bank</title>
+  <link rel="stylesheet" href="../util/page.css">
 </head>
 <body>
-  <h1>Basic Conversation</h1>
-  <img src="chat.jpeg" />
+  <h1>Bank</h1>
+  <div class="imgLabel">
+    <img src="teller.jpeg" />
+    <label>"How can I help you?"</label>
+  </div>
   <input type="text" id="userInput" placeholder="Type your message..." />
-  <button onclick="sendMessage()">Send</button>
+  <button onclick="sendMessage()">Ask</button>
   <div id="spinner" class="spinner" style="display: none;"></div>
-  <div id="chatLog"></div>
+  <div id="output"></div>
 
   <script>
     async function sendMessage() {
@@ -23,9 +26,7 @@
         body: JSON.stringify({ input })
       });
       const data = await response.json();
-      document.getElementById("chatLog").innerHTML += `<p><strong>You:</strong> ${input}</p>`;
-      document.getElementById("chatLog").innerHTML += `<p><strong>AI:</strong> ${data.response}</p>`;
-      document.getElementById("userInput").value = "";
+      document.getElementById("output").innerHTML = data.response;
       spinner.style.display = "none";
     }
   </script>

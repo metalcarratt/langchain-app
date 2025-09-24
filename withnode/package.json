@@ -6,18 +6,21 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "chat": "concurrently \"node exp1-chat-api.js\" \"open ./exp1-chat.html\"",
-    "translate": "concurrently \"node exp2-translation-api.js\" \"open ./exp2-translation.html\"",
-    "paranoid": "concurrently \"node exp3-paranoid-bot-api.js\" \"open ./exp3-paranoid-bot.html\"",
-    "convo": "concurrently \"node exp4-convo-api.js\" \"open ./exp4-convo.html\"",
-    "bank": "concurrently \"node exp5-bank-api.js\" \"open ./exp5-bank.html\""
+    "chat": "concurrently \"node experiments/1-chat/api.js\" \"open experiments/1-chat/index.html\"",
+    "translate": "concurrently \"node experiments/2-translation/api.js\" \"open experiments/2-translation/index.html\"",
+    "paranoid": "concurrently \"node experiments/3-paranoia/api.js\" \"open experiments/3-paranoia/index.html\"",
+    "convo": "concurrently \"node experiments/4-convo/api.js\" \"open experiments/4-convo/index.html\"",
+    "bank": "concurrently \"node experiments/5-bank/api.js\" \"open experiments/5-bank/index.html\"",
+    "recruiter": "concurrently \"node experiments/6-recruiter/api.js\" \"open experiments/6-recruiter/index.html\"",
+    "emailChecker": "concurrently \"node experiments/7-email-checker/api.js\" \"open experiments/7-email-checker/index.html\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@langchain/community": "^0.3.55",
-    "@langchain/core": "^0.3.75",
+    "@langchain/core": "^0.3.77",
+    "@langchain/langgraph": "^0.4.9",
     "@langchain/ollama": "^0.2.4",
     "@langchain/openai": "^0.6.11",
     "body-parser": "^2.2.0",

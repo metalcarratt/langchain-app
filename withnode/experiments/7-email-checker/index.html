@@ -1,0 +1,63 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Email Chcker</title>
+  <link rel="stylesheet" href="../util/page.css">
+</head>
+<body>
+  <h1>Email Checker</h1>
+  <textarea id="userInput" placeholder="Write an email..." rows="4" cols="50"></textarea>
+  <button onclick="sendMessage()">Send</button>
+  <h2>Examples:</h2>
+  <ul>
+    <li>
+      Hi Bob, I've got the stuff. Sending it through now. 
+      <button class="small" onclick="document.getElementById('userInput').value = 'Hi Bob, I\'ve got the stuff. Sending it through now.'">Copy</button>
+    </li>
+    <li>
+      Just drop the stuff inside the door. The passcode to my house is 12345.
+      <button class="small" onclick="document.getElementById('userInput').value = 'Just drop the stuff inside the door. The passcode to my house is 12345.'">Copy</button>
+    </li>
+    <li>
+      You guys are quite dumb, aren't you? I've explained how to fix the problem so many times now and you still don't get it!
+      <button class="small" onclick="document.getElementById('userInput').value = 'You guys are quite dumb, aren\'t you? I\'ve explained how to fix the problem so many times now and you still don\'t get it!'">Copy</button>
+    </li>
+    <li>
+      I'm so annoyed at our CEO. He's doing all the wrong things and never listens to a word we say. 
+      <button 
+        class="small" 
+        onclick="document.getElementById('userInput').value = 'I\'m so annoyed at our CEO. He\'s doing all the wrong things and never listens to a word we say.'"
+      >Copy</button>
+    </li>
+    <li>
+      I got the money you sent and I can tell you that I have proof our company is about to go under. What me to set up a deal? 
+      <button 
+        class="small" 
+        onclick="document.getElementById('userInput').value = 'I got the money you sent and I can tell you that I have proof our company is about to go under. What me to set up a deal?'"
+      >Copy</button>
+    </li>
+  </ul>
+  <div id="spinner" class="spinner" style="display: none;"></div>
+  <div id="chatLog"></div>
+
+  <script>
+    async function sendMessage() {
+      document.getElementById("chatLog").innerHTML = '';
+      const input = document.getElementById("userInput").value;
+      spinner.style.display = "block";
+      const response = await fetch("http://localhost:3000/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ input })
+      });
+      const data = await response.json();
+      document.getElementById("chatLog").innerHTML += `<p><strong>Email:</strong> ${input}</p>`;
+      document.getElementById("chatLog").innerHTML += `<p><strong>Safety:</strong> ${data.response.safety}</p>`;
+      document.getElementById("chatLog").innerHTML += `<p><strong>Description:</strong> ${data.response.description}</p>`;
+      document.getElementById("userInput").value = "";
+      spinner.style.display = "none";
+    }
+  </script>
+</body>
+</html>
