@@ -6,7 +6,7 @@ from langchain_ollama import ChatOllama, OllamaEmbeddings
 from langchain_community.document_loaders import CSVLoader
 from langchain_community.vectorstores import DocArrayInMemorySearch
 from langchain.indexes import VectorstoreIndexCreator
-import timer
+import withpython.timer as timer
 
 llm = ChatOllama(model="llama2", temperature=0)
 embedding = OllamaEmbeddings(model="llama2")

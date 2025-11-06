@@ -6,7 +6,7 @@ from langchain.vectorstores import DocArrayInMemorySearch
 from langchain.evaluation.qa import QAGenerateChain, QAEvalChain
 
 import langchain
-import timer
+import withpython.timer as timer
 
 llm = ChatOllama(model="llama2", temperature=0)
 embedding = OllamaEmbeddings(model="llama2")

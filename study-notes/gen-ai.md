@@ -142,6 +142,26 @@ Model serving allows a/b testing or canary deployments by serving multiple model
 Unpacking the inference table into a “processed payloads/inference table” - can schedule as a batch job
 Lakehouse monitoring will run over the processed table and produce a metrics table
 
+### LLMOps
+
+MLOps = DataOps (data) + DevOps (code) + ModelOps
+- multiple environments (dev, staging, prod)
+  - dev - development and testing
+  - staging - risk mitigating tests
+  - production - human data analysing
+- deployment patterns:
+  - deploy model - the model and the code for using it are developed and deployed separately
+  - deploy code - the model and code for using it are developed and deployed as a single package (??)
+
+LLmOps (on top of MLOps)
+- Taking advantage of existing (open source) models (not just developing your own) [replaces model training]
+- Need to add rigor to prompt templates used with the models
+- With RAG, vector database serving has to be considered as well
+- (self hosted (expensive GPUs) vs external hosted)
+- api governance (to prevent misuse or abuse) [rate limiting]
+- cost and performance [size of llm, size of tokens in/out] - use smaller models, cache prompts, reduce queries to external models
+- human feedback (i.e., via inference tables) - or request human feedback in the UI
+
 ### Databricks specifically:
 
 - Hosts llm models and allows you to call out to others
